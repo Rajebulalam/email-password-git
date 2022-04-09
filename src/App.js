@@ -13,6 +13,9 @@ function App() {
   // Form Validation with react bootstrap
   const [validated, setValidated] = useState(false);
 
+  // Set Checkbox with handler
+  const [register, setRegister] = useState(false);
+
   // Set Email from handler
   const [email, setEmail] = useState('');
 
@@ -29,6 +32,12 @@ function App() {
   const handlePassword = event => {
     setPassword(event.target.value);
     console.log(event.target.value);
+  }
+
+  // Get Checkbox from user interaction
+  const handleRegister = event => {
+    setRegister(event.target.checked);
+    console.log(event.target.checked);
   }
 
 
@@ -67,7 +76,7 @@ function App() {
             <Form.Control onBlur={handlePassword} type="password" required placeholder="Password" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Already Register?" />
+            <Form.Check onChange={handleRegister} type="checkbox" label="Already Register?" />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
