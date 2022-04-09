@@ -1,5 +1,5 @@
 import './App.css';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import app from './firebase.init';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
@@ -86,12 +86,29 @@ function App() {
         .then(result => {
           const user = result.user;
           console.log(user);
+          handleVerifyEmail();
         })
         .catch(error => {
           console.error(error);
           setError(error.message);
         })
     }
+  }
+
+  // Verify a valid user with email 
+  const handleVerifyEmail = () => {
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        console.log('Email Verify');
+      })
+  }
+
+  // Forget Password
+  const handleForgetPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log('Resent Password');
+      })
   }
 
   return (
@@ -122,6 +139,8 @@ function App() {
               register ? 'Log In' : 'Register'
             }
           </Button>
+          <br />
+          <Button onClick={handleForgetPassword} variant="link">Forget Password?</Button>
         </Form>
       </div>
     </div>
