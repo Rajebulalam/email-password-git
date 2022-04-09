@@ -13,6 +13,16 @@ function App() {
   // Form Validation with react bootstrap
   const [validated, setValidated] = useState(false);
 
+  // Set Email from handler
+  const [email, setEmail] = useState('');
+
+  // Get Email from user
+  const handleEmail = event => {
+    setEmail(event.target.value);
+    console.log(event.target.value);
+  }
+
+
   /* 
     Submit Click Handler : 
     When you click the submit button then this code will be executed  
@@ -36,7 +46,7 @@ function App() {
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" required placeholder="Enter email" />
+            <Form.Control onBlur={handleEmail} type="email" required placeholder="Enter email" />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">
               Please give a valid email address!
