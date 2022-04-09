@@ -16,9 +16,18 @@ function App() {
   // Set Email from handler
   const [email, setEmail] = useState('');
 
-  // Get Email from user
+  // Set Password from handler
+  const [password, setPassword] = useState('');
+
+  // Get Email from user with onBlur(onBlur means click outside of specific input)
   const handleEmail = event => {
     setEmail(event.target.value);
+    console.log(event.target.value);
+  }
+
+  // Get Password from user with onBlur
+  const handlePassword = event => {
+    setPassword(event.target.value);
     console.log(event.target.value);
   }
 
@@ -55,7 +64,7 @@ function App() {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" required placeholder="Password" />
+            <Form.Control onBlur={handlePassword} type="password" required placeholder="Password" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Already Register?" />
