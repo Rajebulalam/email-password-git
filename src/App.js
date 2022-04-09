@@ -22,6 +22,12 @@ function App() {
   // Set Password from handler
   const [password, setPassword] = useState('');
 
+  // Set Error Text
+  const [error, setError] = useState('');
+
+  // Set Success Text
+  const [success, setSuccess] = useState('');
+
   // Get Email from user with onBlur(onBlur means click outside of specific input)
   const handleEmail = event => {
     setEmail(event.target.value);
@@ -55,6 +61,13 @@ function App() {
       event.stopPropagation();
     }
     setValidated(true);
+
+    // Password Validation
+    if(!/^(?=^.{8,}$)(?=.*[0-9])(?=.+[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;&gt;.&lt;;,]).{1,}$/.test(password)){
+      setError('Password should contain at least 1 upper case, 1 lower case, 1 number, 1 special character and minimum 8 digit.')
+    }else{
+      setSuccess('Looks Good!')
+    }
   }
 
   return (
@@ -74,6 +87,8 @@ function App() {
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control onBlur={handlePassword} type="password" required placeholder="Password" />
+            <p className='text-danger'> {error} </p>
+            <p className='text-success'> {success} </p>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check onChange={handleRegister} type="checkbox" label="Already Register?" />
