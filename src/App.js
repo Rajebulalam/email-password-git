@@ -1,5 +1,5 @@
 import './App.css';
-import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from './firebase.init';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
@@ -46,7 +46,6 @@ function App() {
     console.log(event.target.checked);
   }
 
-
   /* 
     Submit Click Handler : 
     When you click the submit button then this code will be executed  
@@ -63,10 +62,35 @@ function App() {
     setValidated(true);
 
     // Password Validation
-    if(!/^(?=^.{8,}$)(?=.*[0-9])(?=.+[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;&gt;.&lt;;,]).{1,}$/.test(password)){
+    if (!/^(?=^.{8,}$)(?=.*[0-9])(?=.+[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;&gt;.&lt;;,]).{1,}$/.test(password)) {
       setError('Password should contain at least 1 upper case, 1 lower case, 1 number, 1 special character and minimum 8 digit.')
-    }else{
+    } else {
       setSuccess('Looks Good!')
+    }
+
+    // Store Email and Details from user
+    if (register) {
+      // If you already register then sign in
+      signInWithEmailAndPassword(auth, email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+        })
+        .catch(error => {
+          console.error(error);
+          setError(error.message);
+        })
+    } else {
+      // If not register then create your self 
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+        })
+        .catch(error => {
+          console.error(error);
+          setError(error.message);
+        })
     }
   }
 
