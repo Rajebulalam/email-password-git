@@ -10,6 +10,7 @@ const auth = getAuth(app);
 
 function App() {
 
+  // Form Validation with react bootstrap
   const [validated, setValidated] = useState(false);
 
   /* 
@@ -18,12 +19,13 @@ function App() {
   */
   const handleSubmit = event => {
     event.preventDefault();
+
+    // Form validation with react bootstrap
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
     setValidated(true);
   }
 
