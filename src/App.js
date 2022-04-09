@@ -113,7 +113,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className='w-50 mx-auto m-5 p-5 shadow'>
+      <div className='form-width mx-auto m-5 p-5 shadow'>
         <h2 className='text-primary fw-bold mb-3'>Please {register ? 'Login' : 'Register'} !!</h2>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
