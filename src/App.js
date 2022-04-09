@@ -140,7 +140,7 @@ function App() {
             }
           </Button>
           <br />
-          <Button onClick={handleForgetPassword} variant="link">Forget Password?</Button>
+          <Button className='p-0 mt-3' onClick={handleForgetPassword} variant="link">Forget Password?</Button>
         </Form>
       </div>
     </div>
